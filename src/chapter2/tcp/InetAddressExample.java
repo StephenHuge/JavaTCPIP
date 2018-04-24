@@ -8,7 +8,7 @@ import java.util.Enumeration;
  */
 public class InetAddressExample {
 	public static void main(String[] args) {
-		
+
 		// Get the network interfaces and associated addresses for this host
 		try {
 			Enumeration<NetworkInterface> interfaceList = NetworkInterface.getNetworkInterfaces();
@@ -34,7 +34,7 @@ public class InetAddressExample {
 		} catch (SocketException se) {
 			System.out.println("Error getting network interfaces : " + se.getMessage());
 		}
-		
+
 		// Get name(s)/address(es) of hosts given on command line
 		for (String host : args) {
 			try {
