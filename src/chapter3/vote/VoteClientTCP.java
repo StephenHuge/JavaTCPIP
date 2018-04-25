@@ -2,6 +2,8 @@ package chapter3.vote;
 
 import chapter3.framer.Framer;
 import chapter3.framer.LengthFramer;
+import chapter3.vote.coder.VoteMsgBinCoder;
+import chapter3.vote.coder.VoteMsgCoder;
 
 import java.io.OutputStream;
 import java.net.Socket;

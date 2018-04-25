@@ -41,6 +41,11 @@ public class TCPEchoClient {
 				totalByteRcvd += bytesRcvd;
 			}	// data array is full
 			System.out.println("Received : " + new String(data) + i);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		socket.close();		// Close the socket and its stream
 	}

@@ -1,6 +1,5 @@
 package chapter3.others;
 
-import java.awt.*;
 import java.io.UnsupportedEncodingException;
 
 /**
