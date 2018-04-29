@@ -8,28 +8,28 @@ import java.nio.channels.ServerSocketChannel;
 
 public class TCPServerSelector {
 	
-	private static final int BUFSIZE = 256;		// bufferµÄ×Ö½Ú³¤¶È
-	private static final int TIMEOUT = 3000;	// µÈ´ıÊ±³¤£¨ºÁÃë£©
+	private static final int BUFSIZE = 256;		// bufferçš„å­—èŠ‚é•¿åº¦
+	private static final int TIMEOUT = 3000;	// ç­‰å¾…æ—¶é•¿ï¼ˆæ¯«ç§’ï¼‰
 	
 	public static void main(String[] args) throws IOException {
 		
-		if (args.length < 1) {	// ¼ìÑé²ÎÊıµÄ¸öÊı
-			throw new IllegalArgumentException("²ÎÊı£º<Port> ...");
+		if (args.length < 1) {	// æ£€éªŒå‚æ•°çš„ä¸ªæ•°
+			throw new IllegalArgumentException("å‚æ•°ï¼š<Port> ...");
 		}
 		
-		// ĞÂ½¨Ò»¸öSelectorÓÃÀ´¶àÂ·¼àÌısocketºÍÁ¬½Ó
+		// æ–°å»ºä¸€ä¸ªSelectorç”¨æ¥å¤šè·¯ç›‘å¬socketå’Œè¿æ¥
 		Selector selector = Selector.open();
 		
-		// ÎªselectorºÍÃ¿¸ö½Ó¿Ú´´½¨¼àÌı½Ó¿ÚµÄchannel
+		// ä¸ºselectorå’Œæ¯ä¸ªæ¥å£åˆ›å»ºç›‘å¬æ¥å£çš„channel
 		for (String arg : args) {
 			ServerSocketChannel listenChannel = ServerSocketChannel.open();
 			listenChannel.socket().bind(new InetSocketAddress(Integer.parseInt(arg)));
-			listenChannel.configureBlocking(false);	// ±ØĞëÉèÖÃÎª·Ç×èÈû²ÅÄÜ½øĞĞ×¢²á
-			// ÎªChannel×¢²áSelector£¬·µ»ØµÄkeyÖ±½ÓºöÂÔ
+			listenChannel.configureBlocking(false);	// å¿…é¡»è®¾ç½®ä¸ºéé˜»å¡æ‰èƒ½è¿›è¡Œæ³¨å†Œ
+			// ä¸ºChannelæ³¨å†ŒSelectorï¼Œè¿”å›çš„keyç›´æ¥å¿½ç•¥
 			listenChannel.register(selector, SelectionKey.OP_ACCEPT);
 		}
 		
-		// ´´½¨Ò»¸öÊµÏÖÁËprotocolµÄhandler
+		// åˆ›å»ºä¸€ä¸ªå®ç°äº†protocolçš„handler
 	}
 	
 }

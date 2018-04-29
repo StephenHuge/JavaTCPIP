@@ -8,43 +8,43 @@ import java.nio.channels.SocketChannel;
 public class TCPEchoClientNonblocking {
 	public static void main(String[] args) throws Exception {
 		
-		if ((args.length < 2) || (args.length > 3)) {	// ¼ì²âÊäÈë²ÎÊıµÄ¸öÊı
-			throw new IllegalArgumentException("²ÎÊı£º<Server> <Word> [<Port>]");
+		if ((args.length < 2) || (args.length > 3)) {	// æ£€æµ‹è¾“å…¥å‚æ•°çš„ä¸ªæ•°
+			throw new IllegalArgumentException("å‚æ•°ï¼š<Server> <Word> [<Port>]");
 		}
 		
-		String server = args[0];	// ·şÎñÆ÷µÄÃû³Æ»òÕßIPµØÖ·
-		// Ê¹ÓÃÄ¬ÈÏ×Ö·û¼¯½«ÊäÈëµÄString×ª»»Îª×Ö½Ú
+		String server = args[0];	// æœåŠ¡å™¨çš„åç§°æˆ–è€…IPåœ°å€
+		// ä½¿ç”¨é»˜è®¤å­—ç¬¦é›†å°†è¾“å…¥çš„Stringè½¬æ¢ä¸ºå­—èŠ‚
 		byte[] argument = args[1].getBytes();
 		
 		int servPort = (args.length == 3) ? Integer.parseInt(args[2]) : 7;
 		
-		// ĞÂ½¨Ò»¸öChannel£¬²¢ÉèÖÃÎª·Ç×èÈû
+		// æ–°å»ºä¸€ä¸ªChannelï¼Œå¹¶è®¾ç½®ä¸ºéé˜»å¡
 		SocketChannel clntChan = SocketChannel.open();
 		clntChan.configureBlocking(false);
 		
-		// ³õÊ¼»¯µ½·şÎñÆ÷µÄÁ¬½Ó£¬ÓÉÓÚ·Ç×èÈû¿ÉÄÜÔÚÎ´Íê³ÉÁ¬½ÓÖ±½Ó·µ»Ønull£¬ËùÒÔ´Ë´¦ÖØ¸´ÂÖÑ¯Ö±µ½Á¬½ÓÍê³É
-		// ÕâÖÖÃ¦µÈ´ıÊ®·ÖÀË·ÑÏµÍ³×ÊÔ´£¬´Ë´¦Ö»ÊÇÎªÁËÑİÊ¾
+		// åˆå§‹åŒ–åˆ°æœåŠ¡å™¨çš„è¿æ¥ï¼Œç”±äºéé˜»å¡å¯èƒ½åœ¨æœªå®Œæˆè¿æ¥ç›´æ¥è¿”å›nullï¼Œæ‰€ä»¥æ­¤å¤„é‡å¤è½®è¯¢ç›´åˆ°è¿æ¥å®Œæˆ
+		// è¿™ç§å¿™ç­‰å¾…ååˆ†æµªè´¹ç³»ç»Ÿèµ„æºï¼Œæ­¤å¤„åªæ˜¯ä¸ºäº†æ¼”ç¤º
 		if (!clntChan.connect(new InetSocketAddress(server, servPort))) {
 			while (!clntChan.finishConnect()) {
-				System.out.println(".");	// ÕâÀï±íÊ¾Èç¹ûÃ»ÓĞÍê³ÉÁ¬½Ó£¬Ôò¿ÉÒÔÖ´ĞĞÆäËüÈÎÎñ
+				System.out.println(".");	// è¿™é‡Œè¡¨ç¤ºå¦‚æœæ²¡æœ‰å®Œæˆè¿æ¥ï¼Œåˆ™å¯ä»¥æ‰§è¡Œå…¶å®ƒä»»åŠ¡
 			}
 		}
 		
 		ByteBuffer writeBuf = ByteBuffer.wrap(argument);
 		ByteBuffer readBuf = ByteBuffer.allocate(argument.length);
-		int totalBytesRcvd = 0;				// Ä¿Ç°ÎªÖ¹½ÓÊÕµÄËùÓĞ×Ö½ÚÊı
-		int bytesRcvd;						// ÉÏÒ»´Î¶ÁÈ¡½ÓÊÕµÄ×Ö·ûÊı
+		int totalBytesRcvd = 0;				// ç›®å‰ä¸ºæ­¢æ¥æ”¶çš„æ‰€æœ‰å­—èŠ‚æ•°
+		int bytesRcvd;						// ä¸Šä¸€æ¬¡è¯»å–æ¥æ”¶çš„å­—ç¬¦æ•°
 		while (totalBytesRcvd < argument.length) {
 			if (writeBuf.hasRemaining()) {
 				clntChan.write(writeBuf);
 			}
 			if ((bytesRcvd = clntChan.read(readBuf)) == -1) {
-				throw new SocketException("Á¬½ÓÒÑÌáÇ°¹Ø±Õ");
+				throw new SocketException("è¿æ¥å·²æå‰å…³é—­");
 			}
 			totalBytesRcvd += bytesRcvd;
-			System.out.println(".");	// ÕâÀï±íÊ¾Èç¹ûÃ»ÓĞ¶ÁĞ´Íê±ÏÔò¿ÉÒÔÖ´ĞĞÆäËüÈÎÎñ
+			System.out.println(".");	// è¿™é‡Œè¡¨ç¤ºå¦‚æœæ²¡æœ‰è¯»å†™å®Œæ¯•åˆ™å¯ä»¥æ‰§è¡Œå…¶å®ƒä»»åŠ¡
 		}
-		System.out.println("ÊÕµ½£º" + 		// °´×Ö·û×ª»»Îª×Ö·û´®
+		System.out.println("æ”¶åˆ°ï¼š" + 		// æŒ‰å­—ç¬¦è½¬æ¢ä¸ºå­—ç¬¦ä¸²
 				new String(readBuf.array(), 0, totalBytesRcvd));
 		clntChan.close();
 	}
