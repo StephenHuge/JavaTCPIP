@@ -5,6 +5,7 @@ import java.net.InetSocketAddress;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
+import java.util.Iterator;
 
 public class TCPServerSelector {
 	
@@ -30,6 +31,33 @@ public class TCPServerSelector {
 		}
 		
 		// 创建一个实现了protocol的handler
+        TCPProtocol protocol = new EchoSelectorProtocol(BUFSIZE);
+
+		while (true) {  // 一直运行，执行可用的I/O操作
+			// 等待channel就绪或者到达等待时间
+			if (selector.select(TIMEOUT) == 0) {    // 返回可用的channel的个数
+                System.out.println(".");
+                continue;
+            }
+
+            // 获取key的迭代器
+            Iterator<SelectionKey> keyIterator = selector.selectedKeys().iterator();
+			while (keyIterator.hasNext()) {
+			    SelectionKey key = keyIterator.next();
+			    // 服务器socket是否还有正在处理的任务？
+                if (key.isAcceptable()) {
+                    protocol.handleAccept(key);
+                }
+                // 客户端Socket是否还有正在处理的任务？
+                if (key.isReadable()) {
+                    protocol.handleRead(key);
+                }
+                // 客户端Socket可以写入而且key是有效的
+                if (key.isValid() && key.isWritable()) {
+                    protocol.handleWrite(key);
+                }
+                keyIterator.remove();   // 去掉被选中的key
+            }
+        }
 	}
-	
 }
