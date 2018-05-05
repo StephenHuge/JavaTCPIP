@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.net.SocketException;
 
 /**
- * java 0.0.0.0 "Echo this!" 7
+ * java 0.0.0.0 "Echo this!" 7777
  */
 public class TCPEchoClient {
 	public static void main(String[] args) throws IOException {
@@ -18,7 +18,7 @@ public class TCPEchoClient {
 		// Convert argument String to bytes using the default character encoding
 		byte[] data = args[1].getBytes();
 
-		int servPort = (args.length == 3) ? Integer.parseInt(args[2]) : 7;
+		int servPort = (args.length == 3) ? Integer.parseInt(args[2]) : 7777;
 
 		// Create socket that is connected to server on specified port
 		Socket socket = new Socket(server, servPort);

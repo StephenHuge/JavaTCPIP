@@ -3,7 +3,7 @@ package chapter2.tcp;
 import java.net.*;	// for Socket, and InetAddress
 import java.io.*;	// for IOException and Input/OutputStream
 /**
- * java 7
+ * java 7777
  */
 public class TCPEchoServer {
 	private static final int BUFSIZE = 32;	// Size of receive buffer
