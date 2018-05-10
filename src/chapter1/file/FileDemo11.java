@@ -8,10 +8,15 @@ import java.util.List;
  * 列出指定目录下所有文件
  */
 public class FileDemo11 {
+	
+	private static final String DOT = ".";
+	
 	public static void main(String[] args) {
 		String dir = "d:/WorkEnvironment";
+		String[] ignoredFolders = {"bin", "lib", ".gradle", "example", "webapps", "work"};
+		String[] ignoredSuffixes = {"log", "html", "txt", "jsp", "class", "java"};
 		File f = new File(dir);
-		print(f);
+		print(f, ignoredFolders, ignoredSuffixes);
 	}
 	/**
 	 * 传入根文件名，并初始化各种变量：
@@ -21,8 +26,10 @@ public class FileDemo11 {
 	 * 3. int layer ： 表示层数
 	 * 
 	 * @param file 传入的根文件
+	 * @param ignoredFolders  省略的文件夹名称或者前缀
+	 * @param ignoredSuffixes 省略的文件类型后缀
 	 */
-	public static void print(File file) {
+	public static void print(File file, String[] ignoredFolders, String[] ignoredSuffixes) {
 		if (file == null) return;
 
 		Content root = new Content(null, file, 0, 1);   // 根结点
@@ -35,21 +42,34 @@ public class FileDemo11 {
 		File thisFile = root.getFile();          // 获取根节点的文件
 		System.out.println(thisFile.getPath());  // 打印根节点的文件
 
-		print(root, fnel);
+		print(root, fnel, ignoredFolders, ignoredSuffixes);
 	}
-	private static void print(Content c, List<Integer> fnel) {
+	private static void print(Content c, List<Integer> fnel, String[] ignoredFolders, String[] ignoredSuffixes) {
 		if (c == null || fnel == null)  return;
 		File f = c.getFile();       // 获取当前节点文件
-		File[] sonFiles = f.listFiles();   // 获取当前节点文件的子文件数组
+    	// 获取当前节点文件的子文件数组，用list是为了
+		File[] sonFiles = f.listFiles();
 		
+		// 省略文件夹或者前缀检测
+		for (String ignoredFolder : ignoredFolders) {
+				if ((f.getName().equals(ignoredFolder)) 
+						|| (f.getName().startsWith(ignoredFolder))) {
+					return;
+				}
+		}
+		// 省略文件类型检测
+		for (String ignoredSuffix : ignoredSuffixes) {
+			if (f.getName().endsWith(DOT + ignoredSuffix)) {
+				return;
+			}
+		}
 		printLine(c, fnel, c.getLayer());		// 判断如何打印并打印当前行
-	
 		// 如果此文件为文件夹且不为空，继续打印下一层
 		if (sonFiles != null) {
 			fnel.add(c.getLayer() + 1, sonFiles.length);
 			for (int i = 0; i < sonFiles.length; i++) {
 				Content sonContent = new Content(c, sonFiles[i], c.getLayer() + 1, i);
-				print(sonContent, fnel);	// 递归执行
+				print(sonContent, fnel, ignoredFolders, ignoredSuffixes);	// 递归执行
 			}
 		}
 	}
