@@ -29,8 +29,9 @@ public class FileDemo11 {
 		List<Integer> fileNumOfEachLayer = new ArrayList<>();	// 记录每层文件的数量
 		List<Integer> fnel = fileNumOfEachLayer;   // 名称缩写
 		int layer = 0;          // 当前所在的层数
+		int rootCount = 1;		// root层的文件数为1
 
-		fnel.add(layer, 1);     // 将当前层数文件的数量记录在list中
+		fnel.add(layer, rootCount);     // 将当前层数文件的数量记录在list中
 		File thisFile = root.getFile();          // 获取根节点的文件
 		System.out.println(thisFile.getPath());  // 打印根节点的文件
 
@@ -40,15 +41,15 @@ public class FileDemo11 {
 		if (c == null || fnel == null)  return;
 		File f = c.getFile();       // 获取当前节点文件
 		File[] sonFiles = f.listFiles();   // 获取当前节点文件的子文件数组
+		boolean isSonFilesNull = (sonFiles == null);
 		
 		print(c, fnel, c.getLayer());		// 判断如何打印并打印当前行的目录结构
 		// 判断目录是否为空或者是否是文件
-		System.out.print((c.getFile().list() != null) ? "+ " : "- ");	
-		
+		System.out.print(isSonFilesNull ? "- " : "+ ");	
 		System.out.println(c.getFile().getName());		// 打印文件名
 		
-		// 如果此文件为文件夹，继续打印下一层
-		if (sonFiles != null) {
+		// 如果此文件为文件夹且不为空，继续打印下一层
+		if (!isSonFilesNull) {
 			fnel.add(c.getLayer() + 1, sonFiles.length);
 			for (int i = 0; i < sonFiles.length; i++) {
 				Content sonContent = new Content(c, sonFiles[i], c.getLayer() + 1, i);
@@ -56,13 +57,12 @@ public class FileDemo11 {
 			}
 		}
 	}
-	private static void print(Content c, List<Integer> fnel, int non) {
-		// 递归直到root下一层
+	private static void print(Content c, List<Integer> fnel, int layerOfContent) {
+		// 递归直到root的下一层
 		if (c.getParent() != null) {
-			print(c.getParent(), fnel, non);
+			print(c.getParent(), fnel, layerOfContent);
 		}
-		if (c.getLayer() == non)    return;
-		
+		if (c.getLayer() == layerOfContent)    return;	// 如果已经递归返回到当前层，直接返回
 		// 判断当前文件是否是自己所在层的最后一个文件
 		System.out.print((fnel.get(c.getLayer()) - 1 > c.getId()) ? "│ " : "  ");
 	}
