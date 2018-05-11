@@ -80,7 +80,8 @@ public class FileDemo11 {
 		}
 		if (c.getLayer() == layerOfContent) { // 如果已经递归返回到当前层，直接打印当前行并返回
 			// 判断目录是否为空或者是否是文件
-			String title = (c.getFile().list() == null) ? "- " : "+ ";	
+            String title = ((c.getFile().list() == null)
+                    || (c.getFile().list().length == 0)) ? "- " : "+ ";
 			System.out.println(title + c.getFile().getName());		// 打印文件名	
 			return;	
 		} else {
