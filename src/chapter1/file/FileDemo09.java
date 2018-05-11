@@ -3,7 +3,7 @@ package chapter1.file;
 import java.io.File;
 
 /**
- * �ж�·���Ƿ�ΪĿ¼
+ * 判定路径是否为目录
  */
 public class FileDemo09 {
     public static void main(String[] args) {
@@ -13,9 +13,9 @@ public class FileDemo09 {
         File f = new File(dir);
 
         if (f.isDirectory()) {
-            System.out.println(f.getPath() + " ·����Ŀ¼");
+            System.out.println(f.getPath() + " 路径是目录");
         } else {
-            System.out.println(f.getPath() + " ·������Ŀ¼");
+            System.out.println(f.getPath() + " 路径不是目录");
         }
     }
 }

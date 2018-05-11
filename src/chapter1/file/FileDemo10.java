@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * ÁĞ³öÖ¸¶¨Ä¿Â¼ÏÂËùÓĞÎÄ¼ş
+ * åˆ—å‡ºæŒ‡å®šç›®å½•ä¸‹æ‰€æœ‰æ–‡ä»¶
  */
 public class FileDemo10 {
     public static void main(String[] args) throws IOException {
@@ -20,7 +20,7 @@ public class FileDemo10 {
                 File[] files = file.listFiles();
                 System.out.println(file);
                 for (File f : files) {
-                    if (f != null)  print(f);   // µİ¹éµ÷ÓÃprint()·½·¨´òÓ¡
+                    if (f != null)  print(f);   // é€’å½’è°ƒç”¨print()æ–¹æ³•æ‰“å°
                 }
             } else {
                 System.out.println(" " + file);

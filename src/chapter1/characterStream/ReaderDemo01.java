@@ -3,7 +3,7 @@ package chapter1.characterStream;
 import java.io.*;
 
 /**
- * ×Ö·ûÁ÷Reader»ù±¾ÓÃ·¨¡£½«Êı¾İ¶Áµ½Êı×éÖĞ
+ * å­—ç¬¦æµReaderåŸºæœ¬ç”¨æ³•ã€‚å°†æ•°æ®è¯»åˆ°æ•°ç»„ä¸­
  *  char[] chars = new char[1024];
  *  reader.read(chars);
  */
@@ -21,6 +21,6 @@ public class ReaderDemo01 {
         int len = reader.read(chars);
         reader.close();
 
-        System.out.println("ÄÚÈİÊÇ£º" + new String(chars, 0, len));
+        System.out.println("å†…å®¹æ˜¯ï¼š" + new String(chars, 0, len));
     }
 }

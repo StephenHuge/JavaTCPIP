@@ -5,10 +5,10 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
- * IuputStream»ù±¾ÓÃ·¨£¬ÆäÖĞread·½·¨¶ÁÈ¡µ¥¸ö×Ö½Ú
- * byte[] b = new byte[(int) f.length()];  // Êı×éÓÉÎÄ¼ş´óĞ¡¾ö¶¨
+ * IuputStreamåŸºæœ¬ç”¨æ³•ï¼Œå…¶ä¸­readæ–¹æ³•è¯»å–å•ä¸ªå­—èŠ‚
+ * byte[] b = new byte[(int) f.length()];  // æ•°ç»„ç”±æ–‡ä»¶å¤§å°å†³å®š
  * for (int i = 0; i < b.length; i++)
- *    b[i] = (byte) in.read();        // µ¥¸ö×Ö½Ú¶ÁÈ¡
+ *    b[i] = (byte) in.read();        // å•ä¸ªå­—èŠ‚è¯»å–
  */
 public class InputStreamDemo03 {
     public static void main(String[] args) throws Exception {
@@ -18,13 +18,13 @@ public class InputStreamDemo03 {
                 + File.separator + "test.txt";
         File f = new File(path);
         InputStream in = new FileInputStream(f);
-        byte[] b = new byte[(int) f.length()];  // Êı×éÓÉÎÄ¼ş´óĞ¡¾ö¶¨
+        byte[] b = new byte[(int) f.length()];  // æ•°ç»„ç”±æ–‡ä»¶å¤§å°å†³å®š
 
         for (int i = 0; i < b.length; i++) {
-            b[i] = (byte) in.read();        // µ¥¸ö×Ö½Ú¶ÁÈ¡
+            b[i] = (byte) in.read();        // å•ä¸ªå­—èŠ‚è¯»å–
         }
         in.close();
 
-        System.out.println("ÄÚÈİÊÇ£º" + new String(b));
+        System.out.println("å†…å®¹æ˜¯ï¼š" + new String(b));
     }
 }

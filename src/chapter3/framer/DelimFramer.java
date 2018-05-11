@@ -3,49 +3,49 @@ package chapter3.framer;
 import java.io.*;
 
 /**
- * »ùÓÚ¶¨½ç·ûµÄ³ÉÖ¡·½·¨£¬ÆäÖĞ¶¨½ç·ûÎª"\n"£¬ÊÕµ½¶¨½ç·û¼´±íÊ¾´ËÏûÏ¢ÒÑ¾­Íê³É´«ËÍ
+ * åŸºäºå®šç•Œç¬¦çš„æˆå¸§æ–¹æ³•ï¼Œå…¶ä¸­å®šç•Œç¬¦ä¸º"\n"ï¼Œæ”¶åˆ°å®šç•Œç¬¦å³è¡¨ç¤ºæ­¤æ¶ˆæ¯å·²ç»å®Œæˆä¼ é€
  * 
  * Created by Administrator on 2017/12/30.
  */
 public class DelimFramer implements Framer {
 
-    private InputStream in;     // Êı¾İÊäÈëÔ´
-    private static final byte DELIMER = '\n';   // ĞÅÏ¢¶¨½ç·û
+    private InputStream in;     // æ•°æ®è¾“å…¥æº
+    private static final byte DELIMER = '\n';   // ä¿¡æ¯å®šç•Œç¬¦
 
     public DelimFramer(InputStream in) {
         this.in = in;
     }
     
     /**
-	 * Ìí¼Ó³ÉÖ¡ĞÅÏ¢²¢½«Ö¸¶¨ÏûÏ¢Êä³öµ½Ö¸¶¨Á÷ 
+	 * æ·»åŠ æˆå¸§ä¿¡æ¯å¹¶å°†æŒ‡å®šæ¶ˆæ¯è¾“å‡ºåˆ°æŒ‡å®šæµ 
 	 */
     public void frameMsg(byte[] message, OutputStream out) throws IOException {
-        // È·ÈÏ´«ËÍĞÅÏ¢ÖĞ²»º¬¶¨½ç·û
+        // ç¡®è®¤ä¼ é€ä¿¡æ¯ä¸­ä¸å«å®šç•Œç¬¦
         for (byte b : message) {
-            if (b == DELIMER)   throw new IOException("ĞÅÏ¢ÖĞº¬ÓĞ¶¨½ç·û£¬ĞÅÏ¢ÎŞĞ§");
+            if (b == DELIMER)   throw new IOException("ä¿¡æ¯ä¸­å«æœ‰å®šç•Œç¬¦ï¼Œä¿¡æ¯æ— æ•ˆ");
         }
-        out.write(message);			// Êä³öÁ÷Ğ´³öĞÅÏ¢
-        out.write(DELIMER);			// Êä³öÁ÷Ğ´³ö¶¨½ç·û£¬±íÊ¾ĞÅÏ¢Ğ´ÈëÍê±Ï
+        out.write(message);			// è¾“å‡ºæµå†™å‡ºä¿¡æ¯
+        out.write(DELIMER);			// è¾“å‡ºæµå†™å‡ºå®šç•Œç¬¦ï¼Œè¡¨ç¤ºä¿¡æ¯å†™å…¥å®Œæ¯•
         out.flush();
     }
     
 	/**
-	 * É¨ÃèÖ¸¶¨Á÷£¬´ÓÖĞ³éÈ¡³öÏÂÒ»ÌõĞÅÏ¢ 
+	 * æ‰«ææŒ‡å®šæµï¼Œä»ä¸­æŠ½å–å‡ºä¸‹ä¸€æ¡ä¿¡æ¯ 
 	 */
     public byte[] nextMsg() throws IOException {
         ByteArrayOutputStream messageBuffer = new ByteArrayOutputStream();
         int nextByte;
 
-        // ¶ÁÈ¡ĞÅÏ¢£¬ÖªµÀ¶Áµ½¶¨½ç·û
+        // è¯»å–ä¿¡æ¯ï¼ŒçŸ¥é“è¯»åˆ°å®šç•Œç¬¦
         while ((nextByte = in.read()) != DELIMER) {
-            if (nextByte == -1) {   // Á÷µÄÄ©Î²£¿
-                if (messageBuffer.size() == 0) {    // Èç¹ûÃ»ÓĞ¿É¶ÁÈ¡µÄ×Ö½Ú
+            if (nextByte == -1) {   // æµçš„æœ«å°¾ï¼Ÿ
+                if (messageBuffer.size() == 0) {    // å¦‚æœæ²¡æœ‰å¯è¯»å–çš„å­—èŠ‚
                     return null;
                 } else {
-                    throw new EOFException("ĞÅÏ¢·Ç¿Õ£¬µ«ÊÇÃ»ÓĞ¶¨½ç·û");
+                    throw new EOFException("ä¿¡æ¯éç©ºï¼Œä½†æ˜¯æ²¡æœ‰å®šç•Œç¬¦");
                 }
             }
-            messageBuffer.write(nextByte);  // ½«ĞÅÏ¢Ğ´Èëµ½Á÷ÖĞ
+            messageBuffer.write(nextByte);  // å°†ä¿¡æ¯å†™å…¥åˆ°æµä¸­
         }
         return messageBuffer.toByteArray();
     }

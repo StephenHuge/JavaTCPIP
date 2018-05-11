@@ -4,19 +4,19 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * ³ÉÖ¡ºÍ½âÎö¡£
+ * æˆå¸§å’Œè§£æã€‚
  * 
  * Created by Administrator on 2017/12/30.
  */
 public interface Framer {
 	
 	/**
-	 * Ìí¼Ó³ÉÖ¡ĞÅÏ¢²¢½«Ö¸¶¨ÏûÏ¢Êä³öµ½Ö¸¶¨Á÷ 
+	 * æ·»åŠ æˆå¸§ä¿¡æ¯å¹¶å°†æŒ‡å®šæ¶ˆæ¯è¾“å‡ºåˆ°æŒ‡å®šæµ 
 	 */
 	void frameMsg(byte[] message, OutputStream out) throws IOException;
 	
 	/**
-	 * É¨ÃèÖ¸¶¨Á÷£¬´ÓÖĞ³éÈ¡³öÏÂÒ»ÌõĞÅÏ¢ 
+	 * æ‰«ææŒ‡å®šæµï¼Œä»ä¸­æŠ½å–å‡ºä¸‹ä¸€æ¡ä¿¡æ¯ 
 	 */
 	byte[] nextMsg() throws IOException;
 }

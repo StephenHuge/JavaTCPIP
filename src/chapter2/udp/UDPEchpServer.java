@@ -21,7 +21,7 @@ public class UDPEchpServer {
 		
 		DatagramSocket socket = new DatagramSocket(servPort);
 		DatagramPacket packet = new DatagramPacket(new byte[ECHOMAX], ECHOMAX);
-		System.out.println("本地服务器地址 : " + socket.getLocalSocketAddress());
+		System.out.println("鏈湴鏈嶅姟鍣ㄥ湴鍧� : " + socket.getLocalSocketAddress());
 		
 		while (true) {		// Run forever, receiving and echoing datagrams
 			socket.receive(packet);	// Receive packet from client

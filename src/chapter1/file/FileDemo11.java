@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ÁĞ³öÖ¸¶¨Ä¿Â¼ÏÂËùÓĞÎÄ¼ş¼°Æä½á¹¹
+ * åˆ—å‡ºæŒ‡å®šç›®å½•ä¸‹æ‰€æœ‰æ–‡ä»¶åŠå…¶ç»“æ„
  */
 public class FileDemo11 {
 	
@@ -19,81 +19,81 @@ public class FileDemo11 {
 		print(f, ignoredFolders, ignoredSuffixes);
 	}
 	/**
-	 * ´«Èë¸ùÎÄ¼şÃû£¬²¢³õÊ¼»¯¸÷ÖÖ±äÁ¿£º
-	 * 1. Content root £º ¸ù½Úµã
-	 * 2. List<Integer> fileNumOfEachLayer (fnel) £º ÓÃÀ´¼ÇÂ¼Ã¿²ãÎÄ¼şµÄÊıÁ¿£¬
-	 *    index±íÊ¾²ãÊı£¬Ä¬ÈÏ¸ù½ÚµãÊÇµÚ0²ã
-	 * 3. int layer £º ±íÊ¾²ãÊı
+	 * ä¼ å…¥æ ¹æ–‡ä»¶åï¼Œå¹¶åˆå§‹åŒ–å„ç§å˜é‡ï¼š
+	 * 1. Content root ï¼š æ ¹èŠ‚ç‚¹
+	 * 2. List<Integer> fileNumOfEachLayer (fnel) ï¼š ç”¨æ¥è®°å½•æ¯å±‚æ–‡ä»¶çš„æ•°é‡ï¼Œ
+	 *    indexè¡¨ç¤ºå±‚æ•°ï¼Œé»˜è®¤æ ¹èŠ‚ç‚¹æ˜¯ç¬¬0å±‚
+	 * 3. int layer ï¼š è¡¨ç¤ºå±‚æ•°
 	 * 
-	 * @param file ´«ÈëµÄ¸ùÎÄ¼ş
-	 * @param ignoredFolders  Ê¡ÂÔµÄÎÄ¼ş¼ĞÃû³Æ»òÕßÇ°×º
-	 * @param ignoredSuffixes Ê¡ÂÔµÄÎÄ¼şÀàĞÍºó×º
+	 * @param file ä¼ å…¥çš„æ ¹æ–‡ä»¶
+	 * @param ignoredFolders  çœç•¥çš„æ–‡ä»¶å¤¹åç§°æˆ–è€…å‰ç¼€
+	 * @param ignoredSuffixes çœç•¥çš„æ–‡ä»¶ç±»å‹åç¼€
 	 */
 	public static void print(File file, String[] ignoredFolders, String[] ignoredSuffixes) {
 		if (file == null) return;
 
-		Content root = new Content(null, file, 0, 1);   // ¸ù½áµã
-		List<Integer> fileNumOfEachLayer = new ArrayList<>();	// ¼ÇÂ¼Ã¿²ãÎÄ¼şµÄÊıÁ¿
-		List<Integer> fnel = fileNumOfEachLayer;   // Ãû³ÆËõĞ´
-		int layer = 0;          // µ±Ç°ËùÔÚµÄ²ãÊı
-		int rootCount = 1;		// root²ãµÄÎÄ¼şÊıÎª1
+		Content root = new Content(null, file, 0, 1);   // æ ¹ç»“ç‚¹
+		List<Integer> fileNumOfEachLayer = new ArrayList<>();	// è®°å½•æ¯å±‚æ–‡ä»¶çš„æ•°é‡
+		List<Integer> fnel = fileNumOfEachLayer;   // åç§°ç¼©å†™
+		int layer = 0;          // å½“å‰æ‰€åœ¨çš„å±‚æ•°
+		int rootCount = 1;		// rootå±‚çš„æ–‡ä»¶æ•°ä¸º1
 
-		fnel.add(layer, rootCount);     // ½«µ±Ç°²ãÊıÎÄ¼şµÄÊıÁ¿¼ÇÂ¼ÔÚlistÖĞ
-		File thisFile = root.getFile();          // »ñÈ¡¸ù½ÚµãµÄÎÄ¼ş
-		System.out.println(thisFile.getPath());  // ´òÓ¡¸ù½ÚµãµÄÎÄ¼ş
+		fnel.add(layer, rootCount);     // å°†å½“å‰å±‚æ•°æ–‡ä»¶çš„æ•°é‡è®°å½•åœ¨listä¸­
+		File thisFile = root.getFile();          // è·å–æ ¹èŠ‚ç‚¹çš„æ–‡ä»¶
+		System.out.println(thisFile.getPath());  // æ‰“å°æ ¹èŠ‚ç‚¹çš„æ–‡ä»¶
 
 		print(root, fnel, ignoredFolders, ignoredSuffixes);
 	}
 	private static void print(Content c, List<Integer> fnel, String[] ignoredFolders, String[] ignoredSuffixes) {
 		if (c == null || fnel == null)  return;
-		File f = c.getFile();       // »ñÈ¡µ±Ç°½ÚµãÎÄ¼ş
-    	// »ñÈ¡µ±Ç°½ÚµãÎÄ¼şµÄ×ÓÎÄ¼şÊı×é£¬ÓÃlistÊÇÎªÁË
+		File f = c.getFile();       // è·å–å½“å‰èŠ‚ç‚¹æ–‡ä»¶
+    	// è·å–å½“å‰èŠ‚ç‚¹æ–‡ä»¶çš„å­æ–‡ä»¶æ•°ç»„ï¼Œç”¨listæ˜¯ä¸ºäº†
 		File[] sonFiles = f.listFiles();
 		
-		// Ê¡ÂÔÎÄ¼ş¼Ğ»òÕßÇ°×º¼ì²â
+		// çœç•¥æ–‡ä»¶å¤¹æˆ–è€…å‰ç¼€æ£€æµ‹
 		for (String ignoredFolder : ignoredFolders) {
 				if ((f.getName().equals(ignoredFolder)) 
 						|| (f.getName().startsWith(ignoredFolder))) {
 					return;
 				}
 		}
-		// Ê¡ÂÔÎÄ¼şÀàĞÍ¼ì²â
+		// çœç•¥æ–‡ä»¶ç±»å‹æ£€æµ‹
 		for (String ignoredSuffix : ignoredSuffixes) {
 			if (f.getName().endsWith(DOT + ignoredSuffix)) {
 				return;
 			}
 		}
-		printLine(c, fnel, c.getLayer());		// ÅĞ¶ÏÈçºÎ´òÓ¡²¢´òÓ¡µ±Ç°ĞĞ
-		// Èç¹û´ËÎÄ¼şÎªÎÄ¼ş¼ĞÇÒ²»Îª¿Õ£¬¼ÌĞø´òÓ¡ÏÂÒ»²ã
+		printLine(c, fnel, c.getLayer());		// åˆ¤æ–­å¦‚ä½•æ‰“å°å¹¶æ‰“å°å½“å‰è¡Œ
+		// å¦‚æœæ­¤æ–‡ä»¶ä¸ºæ–‡ä»¶å¤¹ä¸”ä¸ä¸ºç©ºï¼Œç»§ç»­æ‰“å°ä¸‹ä¸€å±‚
 		if (sonFiles != null) {
 			fnel.add(c.getLayer() + 1, sonFiles.length);
 			for (int i = 0; i < sonFiles.length; i++) {
 				Content sonContent = new Content(c, sonFiles[i], c.getLayer() + 1, i);
-				print(sonContent, fnel, ignoredFolders, ignoredSuffixes);	// µİ¹éÖ´ĞĞ
+				print(sonContent, fnel, ignoredFolders, ignoredSuffixes);	// é€’å½’æ‰§è¡Œ
 			}
 		}
 	}
 	private static void printLine(Content c, List<Integer> fnel, int layerOfContent) {
-		// µİ¹éÖ±µ½rootµÄÏÂÒ»²ã
+		// é€’å½’ç›´åˆ°rootçš„ä¸‹ä¸€å±‚
 		if (c.getParent() != null) {
 			printLine(c.getParent(), fnel, layerOfContent);
 		}
-		if (c.getLayer() == layerOfContent) { // Èç¹ûÒÑ¾­µİ¹é·µ»Øµ½µ±Ç°²ã£¬Ö±½Ó´òÓ¡µ±Ç°ĞĞ²¢·µ»Ø
-			// ÅĞ¶ÏÄ¿Â¼ÊÇ·ñÎª¿Õ»òÕßÊÇ·ñÊÇÎÄ¼ş
+		if (c.getLayer() == layerOfContent) { // å¦‚æœå·²ç»é€’å½’è¿”å›åˆ°å½“å‰å±‚ï¼Œç›´æ¥æ‰“å°å½“å‰è¡Œå¹¶è¿”å›
+			// åˆ¤æ–­ç›®å½•æ˜¯å¦ä¸ºç©ºæˆ–è€…æ˜¯å¦æ˜¯æ–‡ä»¶
             String title = ((c.getFile().list() == null)
                     || (c.getFile().list().length == 0)) ? "- " : "+ ";
-			System.out.println(title + c.getFile().getName());		// ´òÓ¡ÎÄ¼şÃû	
+			System.out.println(title + c.getFile().getName());		// æ‰“å°æ–‡ä»¶å	
 			return;	
 		} else {
-			// ÅĞ¶Ïµ±Ç°ÎÄ¼şÊÇ·ñÊÇ×Ô¼ºËùÔÚ²ãµÄ×îºóÒ»¸öÎÄ¼ş
-			System.out.print((fnel.get(c.getLayer()) - 1 > c.getId()) ? "©¦  " : "   ");
+			// åˆ¤æ–­å½“å‰æ–‡ä»¶æ˜¯å¦æ˜¯è‡ªå·±æ‰€åœ¨å±‚çš„æœ€åä¸€ä¸ªæ–‡ä»¶
+			System.out.print((fnel.get(c.getLayer()) - 1 > c.getId()) ? "â”‚  " : "   ");
 		}
 	}
 	static class Content {
 		private Content parent;
 		private File file;
-		private int layer;      // Ïà¶ÔÓÚ¸ùÄ¿Â¼´ËÎÄ¼şµÄ²ãÊı
-		private int id;   // ±¾²ãÖĞËùÓĞµÄÎÄ¼şÊı£¬´Ë±äÁ¿ÊÇÎªÁËÅĞ¶¨×îºóÒ»¸öÎÄ¼şÓÃµÄ
+		private int layer;      // ç›¸å¯¹äºæ ¹ç›®å½•æ­¤æ–‡ä»¶çš„å±‚æ•°
+		private int id;   // æœ¬å±‚ä¸­æ‰€æœ‰çš„æ–‡ä»¶æ•°ï¼Œæ­¤å˜é‡æ˜¯ä¸ºäº†åˆ¤å®šæœ€åä¸€ä¸ªæ–‡ä»¶ç”¨çš„
 
 		public Content(Content parent, File file, int layer, int id) {
 			this.parent = parent;

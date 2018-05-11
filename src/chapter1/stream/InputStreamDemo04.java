@@ -5,13 +5,13 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
- * InputStream»ù±¾ÓÃ·¨£¬Ò²ÊÇ×î³£ÓÃµÄÓÃ·¨¡£
- * ³£ÓÃcode template:
+ * InputStreamåŸºæœ¬ç”¨æ³•ï¼Œä¹Ÿæ˜¯æœ€å¸¸ç”¨çš„ç”¨æ³•ã€‚
+ * å¸¸ç”¨code template:
  *
  * InputStream in;
  * int a;
  *
- * // read()·µ»ØÖµÊÇ¶ÁÈ¡µÄ×Ö½ÚÖµ£¨ÀàĞÍÊÇint£©£¬Èç¹û·µ»Ø-1£¬Ôò±íÊ¾¶ÁÈ¡Íê±Ï
+ * // read()è¿”å›å€¼æ˜¯è¯»å–çš„å­—èŠ‚å€¼ï¼ˆç±»å‹æ˜¯intï¼‰ï¼Œå¦‚æœè¿”å›-1ï¼Œåˆ™è¡¨ç¤ºè¯»å–å®Œæ¯•
  * while ((a = in.read()) != -1) {
  *  // do sth
  * }
@@ -30,12 +30,12 @@ public class InputStreamDemo04 {
         byte[] b = new byte[1024];
         int temp;
 
-        while ((temp = in.read()) != -1) {  // ½«Ã¿´Î¶ÁÈ¡µÄÊı¸³¸øtemp£¬¶ÁÈ¡Íê±ÏÔò·µ»Ø-1
+        while ((temp = in.read()) != -1) {  // å°†æ¯æ¬¡è¯»å–çš„æ•°èµ‹ç»™tempï¼Œè¯»å–å®Œæ¯•åˆ™è¿”å›-1
             b[len] = (byte) temp;
             len++;
         }
         in.close();
 
-        System.out.println("ÄÚÈİÊÇ£º" + new String(b, 0, len));
+        System.out.println("å†…å®¹æ˜¯ï¼š" + new String(b, 0, len));
     }
 }

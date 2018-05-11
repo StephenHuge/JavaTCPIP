@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.RandomAccessFile;
 
 /**
- * Ëæ»ú¶ÁĞ´Á÷¿ÉÒÔÊµÏÖ¶ÔÎÄ¼şÄÚÈİµÄ¶ÁÈ¡£¬µ«ÊÇÈ´¹ıÓÚ¸´ÔÓ£¬Ò»°ãÊ¹ÓÃ×Ö½Ú»òÕß×Ö·ûÁ÷¡£
+ * éšæœºè¯»å†™æµå¯ä»¥å®ç°å¯¹æ–‡ä»¶å†…å®¹çš„è¯»å–ï¼Œä½†æ˜¯å´è¿‡äºå¤æ‚ï¼Œä¸€èˆ¬ä½¿ç”¨å­—èŠ‚æˆ–è€…å­—ç¬¦æµã€‚
  */
 public class RandomAccessFileDemo02 {
 
@@ -22,32 +22,32 @@ public class RandomAccessFileDemo02 {
 
         String name = null;
         int age = 0;
-        byte[] bytes = new byte[8]; // ×¼±¸¿Õ¼ä¶ÁÈ¡ĞÕÃû
+        byte[] bytes = new byte[8]; // å‡†å¤‡ç©ºé—´è¯»å–å§“å
         rdf.skipBytes(12);
         for (int i = 0; i < bytes.length; i++) {
-            bytes[i] = rdf.readByte();  // Ñ­»·¶Á³öÇ°8¸öÄÚÈİ
+            bytes[i] = rdf.readByte();  // å¾ªç¯è¯»å‡ºå‰8ä¸ªå†…å®¹
         }
         name = new String(bytes);
         age = rdf.readInt();
 
-        System.out.println(String.format("µÚÒ»¸öÈË£º%s - %dËê", name, age));
+        System.out.println(String.format("ç¬¬ä¸€ä¸ªäººï¼š%s - %då²", name, age));
         rdf.seek(0);
         for (int i = 0; i < bytes.length; i++) {
-            bytes[i] = rdf.readByte();  // Ñ­»·¶Á³öÇ°8¸öÄÚÈİ
+            bytes[i] = rdf.readByte();  // å¾ªç¯è¯»å‡ºå‰8ä¸ªå†…å®¹
         }
         name = new String(bytes);
         age = rdf.readInt();
 
-        System.out.println(String.format("µÚ¶ş¸öÈË£º%s - %dËê", name, age));
+        System.out.println(String.format("ç¬¬äºŒä¸ªäººï¼š%s - %då²", name, age));
         rdf.skipBytes(12);
 
         for (int i = 0; i < bytes.length; i++) {
-            bytes[i] = rdf.readByte();  // Ñ­»·¶Á³öÇ°8¸öÄÚÈİ
+            bytes[i] = rdf.readByte();  // å¾ªç¯è¯»å‡ºå‰8ä¸ªå†…å®¹
         }
         name = new String(bytes);
         age = rdf.readInt();
 
-        System.out.println(String.format("µÚÈı¸öÈË£º%s - %dËê", name, age));
+        System.out.println(String.format("ç¬¬ä¸‰ä¸ªäººï¼š%s - %då²", name, age));
         rdf.close();
     }
 }

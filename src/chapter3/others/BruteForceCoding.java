@@ -5,15 +5,15 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
- * Ê¹ÓÃ±©Á¦½øĞĞ±àÂë½âÂë
+ * ä½¿ç”¨æš´åŠ›è¿›è¡Œç¼–ç è§£ç 
  */
 public class BruteForceCoding {
-	private static byte byteVal = 101; 	// 1°ÙÁã1
-	private static short shortVal = 10001;	// 1ÍòÁã1
-	private static int intVal = 100000001;	// 1ÒÚÁã1
-	private static long longVal = 1000000000001L;	// 1ÍòÒÚÁã1
+	private static byte byteVal = 101; 	// 1ç™¾é›¶1
+	private static short shortVal = 10001;	// 1ä¸‡é›¶1
+	private static int intVal = 100000001;	// 1äº¿é›¶1
+	private static long longVal = 1000000000001L;	// 1ä¸‡äº¿é›¶1
 	
-	private final static int BSIZE = Byte.SIZE 		>> 3;		// 1ByteËùÕ¼µÄ×Ö½ÚÊı
+	private final static int BSIZE = Byte.SIZE 		>> 3;		// 1Byteæ‰€å çš„å­—èŠ‚æ•°
 	private final static int SSIZE = Short.SIZE 	>> 3;
 	private final static int ISIZE = Integer.SIZE	>> 3;
 	private final static int LSIZE = Long.SIZE 		>> 3;
@@ -21,28 +21,28 @@ public class BruteForceCoding {
 	private final static int BYTEMASK = 0xFF;		// 8 bits
 	
 	/**
-	 * ½«byte[]Êı×é×ª»¯ÎªÊ®½øÖÆ±íÊ¾µÄString
+	 * å°†byte[]æ•°ç»„è½¬åŒ–ä¸ºåè¿›åˆ¶è¡¨ç¤ºçš„String
 	 * 
-	 * @param bArray ÊäÈëbyte[]Êı×é
-	 * @return ×ª»¯½á¹û
+	 * @param bArray è¾“å…¥byte[]æ•°ç»„
+	 * @return è½¬åŒ–ç»“æœ
 	 */
 	public static String byteArrayToDecimalString(byte[] bArray) {
 		StringBuilder rtn = new StringBuilder();
 		for (byte b : bArray) {
-			rtn.append(b & BYTEMASK).append(" ");	// ´Ë´¦Ê¹ÓÃÑÚÂëÊÇÎªÁË·ÀÖ¹×Ö½ÚÊıÖµ×ª»»ÎªintÀàĞÍÊ±£¬·¢Éú·ûºÅÀ©Õ¹£¬¼´×ª»»³ÉÎŞ·ûºÅÕûÊı
+			rtn.append(b & BYTEMASK).append(" ");	// æ­¤å¤„ä½¿ç”¨æ©ç æ˜¯ä¸ºäº†é˜²æ­¢å­—èŠ‚æ•°å€¼è½¬æ¢ä¸ºintç±»å‹æ—¶ï¼Œå‘ç”Ÿç¬¦å·æ‰©å±•ï¼Œå³è½¬æ¢æˆæ— ç¬¦å·æ•´æ•°
 		}
 		return rtn.toString();
 	}
 	
 	/**
-	 * ¶ÔlongĞÍÊı×Ö½øĞĞ±àÂë£¬±àÂë½á¹û´æµ½byte[]Êı×éÖĞ
-	 * Warning: Î´¶Ô³õÊ¼Ìõ¼ş½øĞĞ²âÊÔ (e.g. 0 <= size <= 8)
+	 * å¯¹longå‹æ•°å­—è¿›è¡Œç¼–ç ï¼Œç¼–ç ç»“æœå­˜åˆ°byte[]æ•°ç»„ä¸­
+	 * Warning: æœªå¯¹åˆå§‹æ¡ä»¶è¿›è¡Œæµ‹è¯• (e.g. 0 <= size <= 8)
 	 *  
-	 * @param dst ±àÂë´¢´æµÄÄ¿±êÊı×é
-	 * @param val Òª½øĞĞ±àÂëµÄÊı¾İ
-	 * @param offset Æ«ÒÆÁ¿£¬´ÓÊı×éµÄµÚ (offset + 1) Î»¿ªÊ¼²Ù×÷ 
-	 * @param size ±àÂëµÄÎ»Êı
-	 * @return ±àÂëÍê³ÉºóµÄÆ«ÒÆÁ¿
+	 * @param dst ç¼–ç å‚¨å­˜çš„ç›®æ ‡æ•°ç»„
+	 * @param val è¦è¿›è¡Œç¼–ç çš„æ•°æ®
+	 * @param offset åç§»é‡ï¼Œä»æ•°ç»„çš„ç¬¬ (offset + 1) ä½å¼€å§‹æ“ä½œ 
+	 * @param size ç¼–ç çš„ä½æ•°
+	 * @return ç¼–ç å®Œæˆåçš„åç§»é‡
 	 */
 	public static int encodeIntBigEndian(byte[] dst, long val, int offset, int size) {
 		for (int i = 0; i < size; i++) {
@@ -51,28 +51,28 @@ public class BruteForceCoding {
 		return offset;
 	}
 	/**
-	 * ¶Ôbyte[]Êı×é½øĞĞ½âÂë£¬½âÂë½á¹ûÎªlongĞÍ 
-	 * Warning: Î´¶Ô³õÊ¼Ìõ¼ş½øĞĞ²âÊÔ (e.g. 0 <= size <= 8) 
+	 * å¯¹byte[]æ•°ç»„è¿›è¡Œè§£ç ï¼Œè§£ç ç»“æœä¸ºlongå‹ 
+	 * Warning: æœªå¯¹åˆå§‹æ¡ä»¶è¿›è¡Œæµ‹è¯• (e.g. 0 <= size <= 8) 
 	 */
 	public static long decodeIntBigEndian(byte[] val, int offset, int size) {
 		long rtn = 0;
 		for (int i = 0; i < size; i++) {
-			rtn = (rtn << Byte.SIZE) | ((long) val[offset + i] & BYTEMASK);	// ¼ÓºÅµÄ»°»á±ä³ÉÁ½¸öÓĞ·ûºÅÊıµÄÏà¼Ó
+			rtn = (rtn << Byte.SIZE) | ((long) val[offset + i] & BYTEMASK);	// åŠ å·çš„è¯ä¼šå˜æˆä¸¤ä¸ªæœ‰ç¬¦å·æ•°çš„ç›¸åŠ 
 		}
 		return rtn;
 	}
 	
 	public static void main(String[] args) {
 		byte[] message = new byte[BSIZE + SSIZE + ISIZE + LSIZE];
-		// ½«Èı¸ö±äÁ¿±àÂëµ½Ä¿±êÊı×éÖĞ
+		// å°†ä¸‰ä¸ªå˜é‡ç¼–ç åˆ°ç›®æ ‡æ•°ç»„ä¸­
 		
 		int offset = encodeIntBigEndian(message, byteVal, 0, BSIZE);
 		offset = encodeIntBigEndian(message, shortVal, offset, SSIZE);
 		offset = encodeIntBigEndian(message, intVal, offset, ISIZE);
 		encodeIntBigEndian(message, longVal, offset, LSIZE);
-		System.out.println("¶ÔÈı¸öÊıµÄ±àÂë½á¹ûÎª: \t\t" + byteArrayToDecimalString(message));
+		System.out.println("å¯¹ä¸‰ä¸ªæ•°çš„ç¼–ç ç»“æœä¸º: \t\t" + byteArrayToDecimalString(message));
 		/************************************************************************
-		 * ºÍÉÏÃæ¹¦ÄÜÏàÍ¬
+		 * å’Œä¸Šé¢åŠŸèƒ½ç›¸åŒ
 		 ************************************************************************/
 		ByteArrayOutputStream buf = new ByteArrayOutputStream();
 		DataOutputStream      out = new DataOutputStream(buf);
@@ -86,14 +86,14 @@ public class BruteForceCoding {
             e.printStackTrace();
         }
         byte[] msg = buf.toByteArray();
-        System.out.println("Ê¹ÓÃÏµÍ³I/OÁ÷½øĞĞ±àÂë½á¹ûÎª: \t" + byteArrayToDecimalString(msg));
+        System.out.println("ä½¿ç”¨ç³»ç»ŸI/Oæµè¿›è¡Œç¼–ç ç»“æœä¸º: \t" + byteArrayToDecimalString(msg));
         System.out.println();
         
-        // ½âÂë¶à¸öÊı¾İ
+        // è§£ç å¤šä¸ªæ•°æ®
 		long value = decodeIntBigEndian(message, BSIZE, SSIZE);
-		System.out.println("¶Ô short ½øĞĞ½âÂë = " + value);
+		System.out.println("å¯¹ short è¿›è¡Œè§£ç  = " + value);
 		value = decodeIntBigEndian(message, BSIZE + SSIZE + ISIZE, LSIZE);
-		System.out.println("¶Ô long ½øĞĞ½âÂë = " + value);
+		System.out.println("å¯¹ long è¿›è¡Œè§£ç  = " + value);
 		
 		// Demonstrate dangers of conversion
 		offset = 4;

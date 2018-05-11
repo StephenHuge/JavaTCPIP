@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
- * InputStream»ù±¾²Ù×÷£¬Çø±ğÊÇÊı×éµÄ´óĞ¡ÓÉÎÄ¼ş´óĞ¡¾ö¶¨
+ * InputStreamåŸºæœ¬æ“ä½œï¼ŒåŒºåˆ«æ˜¯æ•°ç»„çš„å¤§å°ç”±æ–‡ä»¶å¤§å°å†³å®š
  */
 public class InputStreamDemo02 {
     public static void main(String[] args) throws Exception {
@@ -15,11 +15,11 @@ public class InputStreamDemo02 {
                 + File.separator + "test.txt";
         File f = new File(path);
         InputStream in = new FileInputStream(f);
-        byte[] b = new byte[(int) f.length()];  // Êı×éÓÉÎÄ¼ş´óĞ¡¾ö¶¨
+        byte[] b = new byte[(int) f.length()];  // æ•°ç»„ç”±æ–‡ä»¶å¤§å°å†³å®š
 
-        in.read(b);       // ½«Êı¾İ¶ÁÈëÊı×é
+        in.read(b);       // å°†æ•°æ®è¯»å…¥æ•°ç»„
         in.close();
 
-        System.out.println("ÄÚÈİÊÇ£º" + new String(b));
+        System.out.println("å†…å®¹æ˜¯ï¼š" + new String(b));
     }
 }

@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.io.Reader;
 
 /**
- * ×Ö·ûÁ÷Reader»ù±¾ÓÃ·¨¡£½«Êı¾İÒÔµ¥¸ö×Ö·û£¨·µ»ØÀàĞÍÊÇint£©¶Áµ½Êı×éÖĞ£¬×î³£ÓÃÓÃ·¨¡£
+ * å­—ç¬¦æµReaderåŸºæœ¬ç”¨æ³•ã€‚å°†æ•°æ®ä»¥å•ä¸ªå­—ç¬¦ï¼ˆè¿”å›ç±»å‹æ˜¯intï¼‰è¯»åˆ°æ•°ç»„ä¸­ï¼Œæœ€å¸¸ç”¨ç”¨æ³•ã€‚
  *  int len = 0;
  *  char[] chars = new char[1024];
  *  int temp;
- *  while ((temp = reader.read()) != -1) {   // ½«Ã¿´Î¶ÁÈ¡µÄÄÚÈİ¸øtemp±äÁ¿£¬Èç¹û·µ»Ø-1£¬±íÊ¾ÒÑ¾­¶ÁÈ¡Íê±Ï
+ *  while ((temp = reader.read()) != -1) {   // å°†æ¯æ¬¡è¯»å–çš„å†…å®¹ç»™tempå˜é‡ï¼Œå¦‚æœè¿”å›-1ï¼Œè¡¨ç¤ºå·²ç»è¯»å–å®Œæ¯•
  *      chars[len++] = (char) temp;
  *  }
  */
@@ -28,11 +28,11 @@ public class ReaderDemo02 {
         char[] chars = new char[1024];
         int temp;
 
-        while ((temp = reader.read()) != -1) {   // ½«Ã¿´Î¶ÁÈ¡µÄÄÚÈİ¸øtemp±äÁ¿£¬Èç¹û·µ»Ø-1£¬±íÊ¾ÒÑ¾­¶ÁÈ¡Íê±Ï
+        while ((temp = reader.read()) != -1) {   // å°†æ¯æ¬¡è¯»å–çš„å†…å®¹ç»™tempå˜é‡ï¼Œå¦‚æœè¿”å›-1ï¼Œè¡¨ç¤ºå·²ç»è¯»å–å®Œæ¯•
             chars[len++] = (char) temp;
         }
         reader.close();
 
-        System.out.println("ÄÚÈİÊÇ£º" + new String(chars, 0, len));
+        System.out.println("å†…å®¹æ˜¯ï¼š" + new String(chars, 0, len));
     }
 }

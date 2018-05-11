@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
- * InputStream »ù±¾ÓÃ·¨£¬Ö±½Ó¶ÁÈ¡µ½Êı×éÖĞ
+ * InputStream åŸºæœ¬ç”¨æ³•ï¼Œç›´æ¥è¯»å–åˆ°æ•°ç»„ä¸­
  *  byte[] b = new byte[1024];
  *  in.read(b);
  *
@@ -20,10 +20,10 @@ public class InputStreamDemo01 {
         InputStream in = new FileInputStream(f);
         byte[] b = new byte[1024];
 
-        int len = in.read(b);       // ½«Êı¾İ¶ÁÈëÊı×é£¬·µ»ØÖµÊÇ¶ÁÈëÊı¾İµÄ³¤¶È
+        int len = in.read(b);       // å°†æ•°æ®è¯»å…¥æ•°ç»„ï¼Œè¿”å›å€¼æ˜¯è¯»å…¥æ•°æ®çš„é•¿åº¦
 
         in.close();
-        System.out.println("¶ÁÈëÊı¾İµÄ³¤¶È£º" + len);
-        System.out.println("ÄÚÈİÊÇ£º" + new String(b, 0, len)); // ±ØĞëÖ¸¶¨·¶Î§£¬²»È»»á´òÓ¡1024¸ö×Ö½Ú
+        System.out.println("è¯»å…¥æ•°æ®çš„é•¿åº¦ï¼š" + len);
+        System.out.println("å†…å®¹æ˜¯ï¼š" + new String(b, 0, len)); // å¿…é¡»æŒ‡å®šèŒƒå›´ï¼Œä¸ç„¶ä¼šæ‰“å°1024ä¸ªå­—èŠ‚
     }
 }
