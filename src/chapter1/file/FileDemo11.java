@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 列出指定目录下所有文件
+ * 列出指定目录下所有文件及其结构
  */
 public class FileDemo11 {
 	

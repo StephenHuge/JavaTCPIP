@@ -3,6 +3,9 @@ package chapter1.randomAccessFile;
 import java.io.File;
 import java.io.RandomAccessFile;
 
+/**
+ * 使用RandomAccessFile类写入文件，此类不常用
+ */
 public class RandomAccessFileDemo01 {
 
     public static final String RW = "rw";

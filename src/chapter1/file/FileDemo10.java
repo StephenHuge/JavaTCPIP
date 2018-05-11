@@ -14,7 +14,7 @@ public class FileDemo10 {
         File f = new File(dir);
         print(f);
     }
-    public static void print(File file) throws IOException {
+    public static void print(File file) {
         if (file != null) {
             if (file.isDirectory()) {
                 File[] files = file.listFiles();
