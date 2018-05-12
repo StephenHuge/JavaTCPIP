@@ -1,0 +1,3 @@
+内存操作流ByteArrayInputStream 和 ByteOutputStream
+
+其实就是将内容放入一个输出流对象中，需要用的时候调取相关API
