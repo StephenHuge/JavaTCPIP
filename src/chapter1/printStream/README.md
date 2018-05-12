@@ -1,0 +1,2 @@
+打印流PrintStream，和OutputStream直接输出相比，明显方便了很多。
+其中包装了OutputWriter。
