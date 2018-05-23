@@ -12,6 +12,6 @@ public class TestFileDemo11 {
         String[] ignoredFolders = {"bin", "lib", ".gradle", "example", "webapps", "work"};
         String[] ignoredSuffixes = {};
         File f = new File(dir);
-        FileDemo11.print(f, ignoredFolders, ignoredSuffixes);
+        FileDemo11.print(f, 2/*, ignoredFolders, ignoredSuffixes*/);
     }
 }

@@ -16,7 +16,8 @@ public class FileDemo11 {
 		String[] ignoredFolders = {"bin", "lib", ".gradle", "example", "webapps", "work"};
 		String[] ignoredSuffixes = {"log", "html", "txt", "jsp", "class", "java"};
 		File f = new File(dir);
-		print(f, ignoredFolders, ignoredSuffixes);
+		int printLayer = 3;
+		print(f, printLayer/*, ignoredFolders, ignoredSuffixes*/);
 	}
 	/**
 	 * 传入根文件名，并初始化各种变量：
@@ -26,10 +27,10 @@ public class FileDemo11 {
 	 * 3. int layer ： 表示层数
 	 * 
 	 * @param file 传入的根文件
-	 * @param ignoredFolders  省略的文件夹名称或者前缀
-	 * @param ignoredSuffixes 省略的文件类型后缀
 	 */
-	public static void print(File file, String[] ignoredFolders, String[] ignoredSuffixes) {
+	/* * @param ignoredFolders  省略的文件夹名称或者前缀
+	 * @param ignoredSuffixes 省略的文件类型后缀*/
+    public static void print(File file, int printLayer/*, String[] ignoredFolders, String[] ignoredSuffixes*/) {
 		if (file == null) return;
 
 		Content root = new Content(null, file, 0, 1);   // 根结点
@@ -42,15 +43,15 @@ public class FileDemo11 {
 		File thisFile = root.getFile();          // 获取根节点的文件
 		System.out.println(thisFile.getPath());  // 打印根节点的文件
 
-		print(root, fnel, ignoredFolders, ignoredSuffixes);
+		print(root, fnel, printLayer/*, ignoredFolders, ignoredSuffixes*/);
 	}
-	private static void print(Content c, List<Integer> fnel, String[] ignoredFolders, String[] ignoredSuffixes) {
+	private static void print(Content c, List<Integer> fnel, int printLayer/*, String[] ignoredFolders, String[] ignoredSuffixes*/) {
 		if (c == null || fnel == null)  return;
 		File f = c.getFile();       // 获取当前节点文件
     	// 获取当前节点文件的子文件数组，用list是为了
 		File[] sonFiles = f.listFiles();
 		
-		// 省略文件夹或者前缀检测
+		/*// 省略文件夹或者前缀检测
 		for (String ignoredFolder : ignoredFolders) {
 				if ((f.getName().equals(ignoredFolder)) 
 						|| (f.getName().startsWith(ignoredFolder))) {
@@ -62,32 +63,36 @@ public class FileDemo11 {
 			if (f.getName().endsWith(DOT + ignoredSuffix)) {
 				return;
 			}
-		}
-		printLine(c, fnel, c.getLayer());		// 判断如何打印并打印当前行
-		// 如果此文件为文件夹且不为空，继续打印下一层
-		if (sonFiles != null) {
-			fnel.add(c.getLayer() + 1, sonFiles.length);
-			for (int i = 0; i < sonFiles.length; i++) {
-				Content sonContent = new Content(c, sonFiles[i], c.getLayer() + 1, i);
-				print(sonContent, fnel, ignoredFolders, ignoredSuffixes);	// 递归执行
-			}
-		}
+		}*/
+		if ((c.getLayer() < printLayer)) {                      // 判断打印多少层
+            printLine(c, fnel, c.getLayer(), printLayer);		// 判断如何打印并打印当前行
+            // 如果此文件为文件夹且不为空，继续打印下一层
+            if (sonFiles != null) {
+                fnel.add(c.getLayer() + 1, sonFiles.length);
+                for (int i = 0; i < sonFiles.length; i++) {
+                    Content sonContent = new Content(c, sonFiles[i], c.getLayer() + 1, i);
+                    print(sonContent, fnel, printLayer/*, ignoredFolders, ignoredSuffixes*/);	// 递归执行
+                }
+            }
+        }
 	}
-	private static void printLine(Content c, List<Integer> fnel, int layerOfContent) {
+	private static void printLine(Content c, List<Integer> fnel,
+								  int layerOfContent, int printLayer) {
 		// 递归直到root的下一层
 		if (c.getParent() != null) {
-			printLine(c.getParent(), fnel, layerOfContent);
+			printLine(c.getParent(), fnel, layerOfContent, printLayer);
 		}
 		if (c.getLayer() == layerOfContent) { // 如果已经递归返回到当前层，直接打印当前行并返回
 			// 判断目录是否为空或者是否是文件
 //            String title = ((c.getFile().list() == null)
 //                    || (c.getFile().list().length == 0)) ? "- " : "+ ";
             // 更改打印目录方式
-            String title = ((fnel.get(c.getLayer()) == c.getId() + 1)
-                    || (c.getLayer() == 0))
-                    ? "└─ " : "├─ ";
-			System.out.println(title + c.getFile().getName());		// 打印文件名	
-			return;	
+            if (c.getParent() != null) {    // 如果是根目录则不打印
+                String title = (fnel.get(c.getLayer()) == c.getId() + 1)
+                                ? "└─ " : "├─ ";
+                System.out.println(title + c.getFile().getName());		// 打印文件名
+            }
+			return;
 		} else {
 			// 判断当前文件是否是自己所在层的最后一个文件
 			System.out.print((fnel.get(c.getLayer()) - 1 > c.getId()) ? "│  " : "   ");
